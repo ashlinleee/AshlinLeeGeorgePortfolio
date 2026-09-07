@@ -972,100 +972,100 @@ export default function Skills() {
         {/* Creative pursuits and hobbies temporarily commented out. */}
         {false && (
           <div className="pt-6 sm:pt-8 border-t border-cyan-500/20">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8">
-            <div className="flex items-center gap-3">
-              <span className="font-orbitron text-xs font-bold text-cyan-400 tracking-widest px-2.5 py-1 rounded bg-cyan-950/40 border border-cyan-500/30">
-                HUMAN PURSUITS
-              </span>
-              <h3 className="font-orbitron text-xl sm:text-3xl font-bold tracking-tight text-white glow-cyan">
-                CREATIVE PURSUITS & HOBBIES
-              </h3>
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8">
+              <div className="flex items-center gap-3">
+                <span className="font-orbitron text-xs font-bold text-cyan-400 tracking-widest px-2.5 py-1 rounded bg-cyan-950/40 border border-cyan-500/30">
+                  HUMAN PURSUITS
+                </span>
+                <h3 className="font-orbitron text-xl sm:text-3xl font-bold tracking-tight text-white glow-cyan">
+                  CREATIVE PURSUITS & HOBBIES
+                </h3>
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {interests.map((hobby, hIdx) => {
-              const isFlipped = flippedCardIdx === hIdx;
-              return (
-                <div
-                  key={hobby.name}
-                  onClick={() => toggleCardFlip(hIdx)}
-                  className={`flip-card-container h-[410px] cursor-pointer group select-none ${
-                    isFlipped ? "is-flipped" : ""
-                  }`}
-                  aria-label={`${hobby.name} hobby details`}
-                >
-                  <div className="flip-card-inner">
-                    {/* FRONT FACE: Image only */}
-                    <div className="flip-card-front border border-cyan-500/30 bg-[#06070c] shadow-2xl overflow-hidden relative">
-                      <div className="hud-corner-tl" />
-                      <div className="hud-corner-tr" />
-                      <div className="hud-corner-bl" />
-                      <div className="hud-corner-br" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {interests.map((hobby, hIdx) => {
+                const isFlipped = flippedCardIdx === hIdx;
+                return (
+                  <div
+                    key={hobby.name}
+                    onClick={() => toggleCardFlip(hIdx)}
+                    className={`flip-card-container h-[410px] cursor-pointer group select-none ${
+                      isFlipped ? "is-flipped" : ""
+                    }`}
+                    aria-label={`${hobby.name} hobby details`}
+                  >
+                    <div className="flip-card-inner">
+                      {/* FRONT FACE: Image only */}
+                      <div className="flip-card-front border border-cyan-500/30 bg-[#06070c] shadow-2xl overflow-hidden relative">
+                        <div className="hud-corner-tl" />
+                        <div className="hud-corner-tr" />
+                        <div className="hud-corner-bl" />
+                        <div className="hud-corner-br" />
 
-                      {/* Full-bleed hobby image */}
-                      <div className="absolute inset-0 z-0 bg-[#06070c]">
-                        <img
-                          src={hobby.image}
-                          alt={hobby.name}
-                          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
-                          loading="lazy"
-                          onError={(e) => {
-                            e.target.style.display = "none";
-                          }}
-                        />
+                        {/* Full-bleed hobby image */}
+                        <div className="absolute inset-0 z-0 bg-[#06070c]">
+                          <img
+                            src={hobby.image}
+                            alt={hobby.name}
+                            className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.target.style.display = "none";
+                            }}
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    {/* BACK FACE: Detailed Narrative & Cyber Telemetry */}
-                    <div className="flip-card-back border border-cyan-400/50 bg-[#080b14]/95 backdrop-blur-2xl p-6 shadow-2xl flex flex-col justify-between relative">
-                      <div className="hud-corner-tl" />
-                      <div className="hud-corner-tr" />
-                      <div className="hud-corner-bl" />
-                      <div className="hud-corner-br" />
+                      {/* BACK FACE: Detailed Narrative & Cyber Telemetry */}
+                      <div className="flip-card-back border border-cyan-400/50 bg-[#080b14]/95 backdrop-blur-2xl p-6 shadow-2xl flex flex-col justify-between relative">
+                        <div className="hud-corner-tl" />
+                        <div className="hud-corner-tr" />
+                        <div className="hud-corner-bl" />
+                        <div className="hud-corner-br" />
 
-                      {/* Header */}
-                      <div>
-                        <div className="flex items-center justify-between pb-3 border-b border-cyan-500/20 mb-4">
-                          <div className="flex items-center gap-2">
-                            <div className="p-1.5 rounded-lg bg-cyan-950/80 border border-cyan-400/40 text-cyan-300">
-                              {getHobbyIcon(hobby.name, "w-4 h-4")}
+                        {/* Header */}
+                        <div>
+                          <div className="flex items-center justify-between pb-3 border-b border-cyan-500/20 mb-4">
+                            <div className="flex items-center gap-2">
+                              <div className="p-1.5 rounded-lg bg-cyan-950/80 border border-cyan-400/40 text-cyan-300">
+                                {getHobbyIcon(hobby.name, "w-4 h-4")}
+                              </div>
+                              <span className="font-mono text-[10px] uppercase tracking-widest text-cyan-300 font-bold">
+                                {hobby.category}
+                              </span>
                             </div>
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-cyan-300 font-bold">
-                              {hobby.category}
-                            </span>
+                          </div>
+
+                          <h4 className="font-orbitron font-bold text-xl text-white glow-cyan mb-1">
+                            {hobby.name}
+                          </h4>
+
+                          <div className="text-[11px] font-mono text-cyan-400/90 mb-4">
+                            {hobby.tagline}
+                          </div>
+
+                          <div className="p-4 rounded-xl bg-black/60 border border-cyan-500/20 text-xs font-inter text-zinc-200 leading-relaxed">
+                            {hobby.detail}
                           </div>
                         </div>
 
-                        <h4 className="font-orbitron font-bold text-xl text-white glow-cyan mb-1">
-                          {hobby.name}
-                        </h4>
-
-                        <div className="text-[11px] font-mono text-cyan-400/90 mb-4">
-                          {hobby.tagline}
-                        </div>
-
-                        <div className="p-4 rounded-xl bg-black/60 border border-cyan-500/20 text-xs font-inter text-zinc-200 leading-relaxed">
-                          {hobby.detail}
-                        </div>
-                      </div>
-
-                      {/* Footer */}
-                      <div className="pt-4 border-t border-cyan-500/20 space-y-2.5">
-                        <div className="flex items-center justify-between font-mono text-[10px] text-zinc-400">
-                          <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            ACTIVE PURSUIT
-                          </span>
-                          <span>HUMAN CORE</span>
+                        {/* Footer */}
+                        <div className="pt-4 border-t border-cyan-500/20 space-y-2.5">
+                          <div className="flex items-center justify-between font-mono text-[10px] text-zinc-400">
+                            <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                              ACTIVE PURSUIT
+                            </span>
+                            <span>HUMAN CORE</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
