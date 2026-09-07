@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Terminal, Shield, ArrowDown, ChevronRight, Activity, Cpu, Download } from 'lucide-react';
-import { audioEngine } from '../utils/audioEngine';
+import React, { useState, useEffect } from "react";
+import {
+  Terminal,
+  Shield,
+  ArrowDown,
+  ChevronRight,
+  Activity,
+  Cpu,
+  Download,
+} from "lucide-react";
 
 export default function Hero({ onEnterSystem }) {
   const [bootStep, setBootStep] = useState(0);
-  const [typedName, setTypedName] = useState('');
+  const [typedName, setTypedName] = useState("");
   const fullName = "ASHLIN LEE GEORGE";
 
   // Boot sequence
   useEffect(() => {
-    const t1 = setTimeout(() => setBootStep(1), 400);  // scan initiated
+    const t1 = setTimeout(() => setBootStep(1), 400); // scan initiated
     const t2 = setTimeout(() => setBootStep(2), 1100); // neural core active
     const t3 = setTimeout(() => setBootStep(3), 1800); // identity online
 
@@ -67,12 +74,6 @@ export default function Hero({ onEnterSystem }) {
       {/* Center Cinematic Typography & Robot Anchor Frame */}
       <div className="my-auto py-12 max-w-4xl">
         <div className="space-y-4">
-          {/* Micro HUD Tag */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/40 border border-cyan-500/30 backdrop-blur-sm text-cyan-400 font-mono text-xs tracking-widest">
-            <Activity className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
-            <span>OPERATING SYSTEM INITIALIZED // PROTOCOL 00</span>
-          </div>
-
           {/* Character-by-character Title */}
           <h1 className="font-orbitron font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white glow-cyan">
             {typedName}
@@ -83,13 +84,14 @@ export default function Hero({ onEnterSystem }) {
 
           {/* Subtitle / Discipline */}
           <div className="font-space font-semibold text-lg sm:text-2xl text-cyan-200 tracking-wide">
-            ML ENGINEER | FULL STACK DEVELOPER
+            AI/ML ENGINEER | FULL STACK DEVELOPER
           </div>
 
           {/* Concise Bio Teaser */}
           <p className="max-w-2xl text-zinc-300 font-inter text-sm sm:text-base leading-relaxed pt-3 backdrop-blur-xs">
-            Turning data into intelligence and ideas into products through
-            Machine Learning, Deep Learning, and Full-Stack Engineering.
+            Building intelligent systems and turning ideas into impactful
+            products with Machine Learning, Deep Learning, and Full-Stack
+            Engineering.
           </p>
         </div>
 
@@ -97,10 +99,7 @@ export default function Hero({ onEnterSystem }) {
         <div className="pt-8 flex flex-wrap items-center gap-4">
           {/* Enter System */}
           <button
-            onClick={() => {
-              audioEngine.playTactileBlip(880, 0.05);
-              if (onEnterSystem) onEnterSystem();
-            }}
+            onClick={() => onEnterSystem?.()}
             className="group relative px-6 py-3.5 rounded bg-cyan-500/20 border border-cyan-400 text-cyan-200 font-mono text-xs font-bold tracking-widest hover:bg-cyan-500/30 hover:shadow-cyan-glow transition-all flex items-center gap-3"
           >
             <span>[ ENTER SYSTEM ]</span>
@@ -111,9 +110,6 @@ export default function Hero({ onEnterSystem }) {
           <a
             href="/resume/Ashlin%20CV.pdf"
             download="Ashlin_CV.pdf"
-            onClick={() => {
-              audioEngine.playTactileBlip(660, 0.05);
-            }}
             className="group relative px-6 py-3.5 rounded bg-white/5 border border-white/20 text-white/80 font-mono text-xs font-bold tracking-widest hover:bg-white/10 hover:border-cyan-400/60 hover:text-cyan-200 transition-all flex items-center gap-3"
           >
             <span>[ DOWNLOAD RESUME ]</span>

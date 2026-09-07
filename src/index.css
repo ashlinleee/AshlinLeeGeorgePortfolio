@@ -15,7 +15,7 @@
     scroll-behavior: smooth;
     background-color: #030304;
     color: #ffffff;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
   body {
@@ -46,8 +46,8 @@
 .scanline-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(255,255,255,0),
-    rgba(255,255,255,0) 50%,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
     rgba(0, 240, 255, 0.04) 50%,
     rgba(0, 240, 255, 0.04)
   );
@@ -57,7 +57,7 @@
 
 /* Subtle Sci-Fi Grid */
 .cyber-grid {
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -65,18 +65,26 @@
 
 /* Glass HUD Panel */
 .hud-card {
-  background: rgba(7, 8, 14, 0.88);
+  background: linear-gradient(
+    135deg,
+    rgba(5, 15, 21, 0.58),
+    rgba(7, 8, 14, 0.58)
+  );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(0, 240, 255, 0.22);
-  box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 240, 255, 0.04);
+  box-shadow:
+    0 16px 48px -8px rgba(0, 0, 0, 0.9),
+    inset 0 0 20px rgba(0, 240, 255, 0.04);
   position: relative;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hud-card:hover {
   border-color: rgba(0, 240, 255, 0.45);
-  box-shadow: 0 16px 48px -8px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(0, 240, 255, 0.06);
+  box-shadow:
+    0 16px 48px -8px rgba(0, 240, 255, 0.15),
+    inset 0 0 20px rgba(0, 240, 255, 0.06);
 }
 
 /* Corner Reticles for HUD Panels */
@@ -135,8 +143,13 @@
 
 /* Animation utilities */
 @keyframes pulseWave {
-  0%, 100% { height: 4px; }
-  50% { height: 28px; }
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 28px;
+  }
 }
 
 .wave-bar {
@@ -144,14 +157,361 @@
 }
 
 @keyframes scanVertical {
-  0% { top: 0%; opacity: 0; }
-  15% { opacity: 0.8; }
-  85% { opacity: 0.8; }
-  100% { top: 100%; opacity: 0; }
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 
 .hud-scanline-laser {
   animation: scanVertical 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Internship career roadmap */
+.career-timeline {
+  position: relative;
+  --career-progress: 34%;
+}
+.career-beam {
+  position: absolute;
+  z-index: 0;
+  top: 40px;
+  bottom: 40px;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(0, 240, 255, 0.16);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
+}
+.career-beam span {
+  display: block;
+  width: 100%;
+  height: var(--career-progress);
+  background: linear-gradient(#6bfbff, #00b6ca);
+  box-shadow:
+    0 0 14px #00f0ff,
+    0 0 26px rgba(0, 240, 255, 0.65);
+  transition: height 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.career-entry {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 104px minmax(0, 1fr);
+  gap: 0 34px;
+  min-height: 330px;
+  padding-bottom: 62px;
+}
+.career-side {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 18px;
+}
+.career-left {
+  justify-content: flex-end;
+  text-align: right;
+}
+.career-right {
+  justify-content: flex-start;
+  text-align: left;
+}
+.career-axis {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.career-node {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(0, 240, 255, 0.48);
+  border-radius: 999px;
+  background: #07131a;
+  color: #92faff;
+  font:
+    700 11px/1 "Orbitron",
+    sans-serif;
+  box-shadow:
+    0 0 0 7px rgba(0, 240, 255, 0.06),
+    0 0 14px rgba(0, 240, 255, 0.3);
+  transition:
+    transform 350ms ease,
+    border-color 350ms ease,
+    box-shadow 350ms ease,
+    background 350ms ease;
+}
+.career-node::before,
+.career-node::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: 45px;
+  background: rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.22);
+  transition:
+    background 350ms ease,
+    box-shadow 350ms ease;
+}
+.career-node::before {
+  right: 100%;
+}
+.career-node::after {
+  left: 100%;
+}
+.career-entry.is-active .career-node {
+  transform: scale(1.18);
+  border-color: #9cfeff;
+  background: #0b2c34;
+  box-shadow:
+    0 0 0 10px rgba(0, 240, 255, 0.1),
+    0 0 18px #00f0ff,
+    0 0 42px rgba(0, 240, 255, 0.72);
+}
+.career-entry.is-active .career-node::before,
+.career-entry.is-active .career-node::after {
+  background: #61faff;
+  box-shadow: 0 0 12px #00f0ff;
+}
+.career-panel {
+  width: min(100%, 430px);
+  position: relative;
+  padding: 23px 25px;
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  background: linear-gradient(
+    135deg,
+    rgba(5, 15, 21, 0.82),
+    rgba(7, 8, 14, 0.82)
+  );
+  box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.025);
+  opacity: 0.58;
+  transform: translateY(5px);
+  transition:
+    opacity 350ms ease,
+    transform 350ms ease,
+    border-color 350ms ease,
+    box-shadow 350ms ease;
+}
+.career-panel::before,
+.career-panel::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: #00f0ff;
+  opacity: 0.7;
+}
+.career-panel::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.career-panel::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+.career-panel.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: rgba(0, 240, 255, 0.52);
+  box-shadow:
+    0 12px 36px -18px rgba(0, 240, 255, 0.35),
+    inset 0 0 30px rgba(0, 240, 255, 0.045);
+}
+.career-left .career-details {
+  text-align: left;
+}
+.career-left .career-metadata .career-panel-kicker {
+  justify-content: flex-end;
+}
+.career-panel-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #5eeff7;
+  font:
+    700 12px/1.2 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.14em;
+}
+.career-period {
+  margin: 9px 0 0;
+  color: #e7fcff;
+  font:
+    700 16px/1.4 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.05em;
+}
+.career-location {
+  margin: 9px 0 0;
+  color: #a6bbc0;
+  font:
+    600 14px/1.4 "JetBrains Mono",
+    monospace;
+  letter-spacing: 0.1em;
+}
+.career-organisation {
+  margin: 10px 0 0;
+  color: #fff;
+  font:
+    700 clamp(20px, 2.4vw, 29px)/1.12 "Space Grotesk",
+    sans-serif;
+  letter-spacing: -0.02em;
+}
+.career-role {
+  margin: 9px 0 0;
+  color: #fff;
+  font:
+    700 clamp(21px, 2.6vw, 31px)/1.1 "Orbitron",
+    sans-serif;
+  text-transform: uppercase;
+}
+.career-work-list {
+  display: grid;
+  gap: 13px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #d5e1e4;
+  font:
+    400 15px/1.6 "Inter",
+    sans-serif;
+}
+.career-work-list li {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+}
+.career-work-list svg {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: #35e8ef;
+}
+.career-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+.career-tags span {
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  background: rgba(0, 240, 255, 0.06);
+  padding: 6px 9px;
+  color: #bdfbff;
+  font:
+    600 12px/1.2 "JetBrains Mono",
+    monospace;
+}
+.career-impact {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-left: 2px solid #00f0ff;
+  background: rgba(0, 240, 255, 0.07);
+}
+.career-impact strong {
+  display: block;
+  margin-top: 7px;
+  color: #69f9ff;
+  font:
+    700 18px/1.35 "Orbitron",
+    sans-serif;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.48);
+}
+
+@media (max-width: 767px) {
+  .career-beam {
+    left: 24px;
+    top: 28px;
+    bottom: 28px;
+  }
+  .career-entry {
+    display: block;
+    min-height: 0;
+    padding: 0 0 54px 59px;
+  }
+  .career-axis {
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 48px;
+  }
+  .career-node {
+    width: 40px;
+    height: 40px;
+    font-size: 9px;
+  }
+  .career-node::before {
+    display: none;
+  }
+  .career-node::after {
+    width: 23px;
+  }
+  .career-side {
+    display: block;
+    padding: 0;
+    text-align: left;
+  }
+  .career-left {
+    margin-bottom: 12px;
+  }
+  .career-panel {
+    width: 100%;
+    padding: 18px;
+    text-align: left;
+  }
+  .career-left .career-metadata .career-panel-kicker {
+    justify-content: flex-start;
+  }
+}
+
+/* 3D Flip Card Utilities */
+.flip-card-container {
+  perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card-container:hover .flip-card-inner,
+.flip-card-container.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
 }
 
 /* Accessibility: respect prefers-reduced-motion */

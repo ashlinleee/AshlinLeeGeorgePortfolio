@@ -2,43 +2,34 @@ import React, { useState, useEffect, useRef } from 'react';
 import ScrollVideo from './components/ScrollVideo';
 import Navbar from './components/Navbar';
 import CustomCursor from './components/CustomCursor';
-import VoiceMode from './components/VoiceMode';
 import Chatbot from './components/Chatbot';
 
 import Hero from './sections/Hero';
 import Identity from './sections/Identity';
 import Experience from './sections/Experience';
-import SocialImpact from './sections/SocialImpact';
 import Projects from './sections/Projects';
 import Skills from './sections/Skills';
 import Education from './sections/Education';
-import HumanModule from './sections/HumanModule';
 import Contact from './sections/Contact';
 
 import { useScrollProgress } from './hooks/useScrollProgress';
-import { audioEngine } from './utils/audioEngine';
 
 export default function App() {
   const { scrollProgress, activeSection } = useScrollProgress();
 
   const [loadingProgress, setLoadingProgress] = useState(15);
   const [isSystemReady, setIsSystemReady] = useState(false);
-  const [hasEntered, setHasEntered] = useState(false);
-
-  const [isVoiceActive, setIsVoiceActive] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
-  // Section references for smooth scrolling navigation
+  // Section references for smooth scrolling navigation (7 sequential phases)
   const sectionRefs = [
     useRef(null), // 00 Hero
-    useRef(null), // 01 Identity
-    useRef(null), // 02 Experience
-    useRef(null), // 03 Social Impact
-    useRef(null), // 04 Projects
-    useRef(null), // 05 Skills
-    useRef(null), // 06 Education
-    useRef(null), // 07 Human Module
-    useRef(null), // 09 Contact
+    useRef(null), // 01 Identity Profile
+    useRef(null), // 02 Projects
+    useRef(null), // 03 Experience / Internships
+    useRef(null), // 04 Skills, Certifications & Pursuits
+    useRef(null), // 05 Academic Core
+    useRef(null), // 06 Connect / Contact
   ];
 
   // Navigate to any section by index
@@ -68,12 +59,9 @@ export default function App() {
   }, []);
 
   const handleEnterSystem = () => {
-    setHasEntered(true);
-    audioEngine.playChirp('success');
     navigateToSection(1);
   };
 
-  // Opening a fixed overlay must never alter the reader's place in the story.
   const toggleChatAtCurrentPosition = () => {
     const currentScroll = window.scrollY;
     setIsChatOpen((open) => !open);
@@ -100,25 +88,9 @@ export default function App() {
       <Navbar
         activeSection={activeSection}
         onNavigate={navigateToSection}
-        onToggleVoice={() => setIsVoiceActive(!isVoiceActive)}
-        isVoiceActive={isVoiceActive}
-        onToggleChat={toggleChatAtCurrentPosition}
-        isChatOpen={isChatOpen}
       />
 
-      {/* Voice Mode HUD Interface */}
-      <VoiceMode
-        isOpen={isVoiceActive}
-        onClose={() => setIsVoiceActive(false)}
-        onNavigate={navigateToSection}
-      />
-
-      {/* Floating ASHLIN AI Assistant Chatbot */}
-      <Chatbot
-        isOpen={isChatOpen}
-        onToggle={toggleChatAtCurrentPosition}
-        onNavigate={navigateToSection}
-      />
+      <Chatbot isOpen={isChatOpen} onToggle={toggleChatAtCurrentPosition} />
 
       {/* 
         CONTINUOUS CINEMATIC STORYLINE SECTIONS
@@ -136,38 +108,28 @@ export default function App() {
           <Identity />
         </div>
 
-        {/* Phase 02: Mission Logs (Experience) */}
+        {/* Phase 02: Created Systems (Projects) */}
         <div ref={sectionRefs[2]} id="section-2">
-          <Experience />
-        </div>
-
-        {/* Phase 03: Human Connection Protocol (Social Impact) */}
-        <div ref={sectionRefs[3]} id="section-3">
-          <SocialImpact />
-        </div>
-
-        {/* Phase 04: Created Systems (Projects) */}
-        <div ref={sectionRefs[4]} id="section-4">
           <Projects />
         </div>
 
-        {/* Phase 05: System Capabilities (Skills Matrix) */}
-        <div ref={sectionRefs[5]} id="section-5">
+        {/* Phase 03: Internship Timeline */}
+        <div ref={sectionRefs[3]} id="section-3">
+          <Experience />
+        </div>
+
+        {/* Phase 04: System Capabilities, Certifications & Creative Pursuits */}
+        <div ref={sectionRefs[4]} id="section-4">
           <Skills />
         </div>
 
-        {/* Phase 06: Academic Core & System Certifications */}
-        <div ref={sectionRefs[6]} id="section-6">
+        {/* Phase 05: Academic Core */}
+        <div ref={sectionRefs[5]} id="section-5">
           <Education />
         </div>
 
-        {/* Phase 07: Human Intelligence, Languages & Pursuits */}
-        <div ref={sectionRefs[7]} id="section-7">
-          <HumanModule />
-        </div>
-
-        {/* Phase 09: Establish Connection & System Shutdown */}
-        <div ref={sectionRefs[9]} id="section-9">
+        {/* Phase 06: Establish Connection / Contact */}
+        <div ref={sectionRefs[6]} id="section-6">
           <Contact />
         </div>
 
