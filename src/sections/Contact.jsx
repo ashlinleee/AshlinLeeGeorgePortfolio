@@ -60,79 +60,84 @@ export default function Contact() {
     transmissionId: null,
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (
-      !formData.name.trim() ||
-      !formData.email.trim() ||
-      !formData.message.trim()
-    ) {
-      setStatus({
-        loading: false,
-        success: false,
-        error: "All fields must be populated for transmission.",
-        transmissionId: null,
-      });
-      return;
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  if (
+    !formData.name.trim() ||
+    !formData.email.trim() ||
+    !formData.message.trim()
+  ) {
     setStatus({
-      loading: true,
+      loading: false,
       success: false,
-      error: null,
+      error: "All fields must be populated for transmission.",
       transmissionId: null,
     });
 
-    try {
-      const res = await fetch("http://localhost:5001/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+    return;
+  }
 
-      const data = await res.json();
+  setStatus({
+    loading: true,
+    success: false,
+    error: null,
+    transmissionId: null,
+  });
 
-      if (res.ok) {
-        setStatus({
-          loading: false,
-          success: true,
-          error: null,
-          transmissionId: data.transmissionId || `TRX-${Date.now()}`,
-        });
-        setFormData({ name: "", email: "", message: "" });
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-        // Trigger confetti celebration
-        try {
-          confetti({
-            particleCount: 60,
-            spread: 70,
-            origin: { y: 0.8 },
-            colors: ["#00f0ff", "#8a2be2", "#10b981"],
-          });
-        } catch (e) {}
-      } else {
-        setStatus({
-          loading: false,
-          success: false,
-          error: data.error || "TRANSMISSION FAILED: Uplink protocol error.",
-          transmissionId: null,
-        });
-      }
-    } catch (err) {
-      console.warn(
-        "Express backend offline, simulating transmission acknowledgment",
-        err,
-      );
-      // Client-side fallback so demo never fails
+    const data = await res.json();
+
+    if (res.ok && data.success) {
       setStatus({
         loading: false,
         success: true,
         error: null,
-        transmissionId: `LOCAL-TRX-${Date.now()}`,
+        transmissionId: data.transmissionId,
       });
-      setFormData({ name: "", email: "", message: "" });
+
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+
+      // Trigger confetti celebration
+      try {
+        confetti({
+          particleCount: 60,
+          spread: 70,
+          origin: { y: 0.8 },
+          colors: ["#00f0ff", "#8a2be2", "#10b981"],
+        });
+      } catch (e) {}
+    } else {
+      setStatus({
+        loading: false,
+        success: false,
+        error: data.error || "TRANSMISSION FAILED.",
+        transmissionId: null,
+      });
     }
-  };
+  } catch (err) {
+    console.error("Contact form error:", err);
+
+    setStatus({
+      loading: false,
+      success: false,
+      error: "TRANSMISSION FAILED: Please check your connection and try again.",
+      transmissionId: null,
+    });
+  }
+};
 
   return (
     <section className="relative flex flex-col justify-between px-6 py-12 sm:px-12 sm:py-16 z-10">

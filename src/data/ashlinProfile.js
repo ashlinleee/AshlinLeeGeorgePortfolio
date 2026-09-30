@@ -28,7 +28,7 @@ export const ashlinProfile = {
   },
   contact: {
     email: "ashlinleegeorge@gmail.com",
-    phone: "+91 63666 08726",
+    phone: "+91 6366608726",
     location: "Mumbai, India",
     linkedin: "https://linkedin.com/in/ashlin-lee-george/",
     github: "https://github.com/ashlinleee",
